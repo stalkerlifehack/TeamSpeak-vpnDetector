@@ -23,14 +23,14 @@ if [ "$1" == "start" ];
 	then
     echo -e '\033[33mStarting!'
     for (( i=1; $i <= 1; i++ )) ; do
-  		if screen -ls | grep -q anti_logger;
+  		if screen -ls | grep -q vpnDetector;
   		then
         sleep 0.3
   			redMessage "   -  bot is already started!"
   		else
-  			screen -AdmS anti_logger php bot.php
+  			screen -AdmS vpnDetector php bot.php
         sleep 0.3
-        if screen -ls | grep -q anti_logger;
+        if screen -ls | grep -q vpnDetector;
         then
           sleep 0.00001 
         else
@@ -54,9 +54,9 @@ elif [ "$1" == "stop" ];
     else
       echo -e '\033[33mStopping!\033[0m'
       for (( i=1; $i <= 1; i++ )) ; do
-    		if screen -ls | grep -q anti_logger;
+    		if screen -ls | grep -q vpnDetector;
     		then
-    			screen -X -S anti_logger quit
+    			screen -X -S vpnDetector quit
     		else
     			redMessage "   - bot is already started! ($i)"
     		fi
@@ -73,7 +73,7 @@ elif [ "$1" == "daemon" ];
     if screen -ls | grep -q daemon;
     then
       screen -X -S daemon quit
-      screen -X -S anti_logger quit
+      screen -X -S vpnDetector quit
 
       redMessage 'Stopping daemon!'
     else
@@ -85,14 +85,14 @@ elif [ "$1" == "check" ];
 then
   while [ true ] ; do
     for (( i=1; $i <= 1; i++ )) ; do
-      if screen -ls | grep -q anti_logger;
+      if screen -ls | grep -q vpnDetector;
       then
         sleep 0.2
         greenMessage "   - bot is already started!"
       else
-        screen -AdmS anti_logger php bot.php
+        screen -AdmS vpnDetector php bot.php
         sleep 1
-        if screen -ls | grep -q anti_logger;
+        if screen -ls | grep -q vpnDetector;
         then
           sleep 0.2
         else

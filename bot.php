@@ -17,7 +17,7 @@ require_once('lang/language.php');
 date_default_timezone_set('Europe/Warsaw');
 define("version", "4.1");
 define("author", "Stalker");
-define("name", "qBot");
+define("name", "vpnDetector");
 define("telegram", "@Stal_ker");
 define("ts", "Jutuby.net");
 define("SP", " ");
@@ -54,8 +54,8 @@ require_once('inc/classes/bot.class.php');
 echo PREF.$lang['core']['checkCache'][$config['lang']].PHP_EOL;
 $new = 0;
 
-  if(!file_exists('cache/saveClientChannel.json')){
-    file_put_contents('cache/saveClientChannel.json', '[]');
+  if(!file_exists('cache/proxyChecker.json')){
+    file_put_contents('cache/proxyChecker.json', '[]');
     $new = 1;
   }
 
@@ -144,8 +144,8 @@ if ($ts->connect()) {
     echo $lang['core']['preview'][$config['lang']].PHP_EOL;
 
 
-    $publicChannelGroup = new publicChannelGroup();
-    $publicChannelGroupHelper = new publicChannelGroupHelper();
+    $vpnDetector = new vpnDetector();
+
 
     # get socket
     $socket = $ts->runtime['socket'];
@@ -153,6 +153,7 @@ if ($ts->connect()) {
  
         # When user change channel or admin send command or token used
         bot::sendCommand($socket, 'servernotifyregister event=channel id=0');
+
 
 
 
