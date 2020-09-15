@@ -92,6 +92,10 @@ $lang = [
                'PL' => "    Pętla wykonała sie w ",
                'EN' => "    Loop executed in ",
           ],
+          'noFunction' => [
+               'PL' => "Żadna funkcja nie jest włączona!",
+               'EN' => "All function are dissabled!",
+          ],
 
      ],
 

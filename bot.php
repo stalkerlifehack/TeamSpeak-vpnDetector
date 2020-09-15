@@ -140,7 +140,7 @@ if ($ts->connect()) {
         exit(ERR.$lang['core']['queryErr'][$config['lang']].PHP_EOL);
     }
 
-    echo $lang['core']['preview'][$config['lang']].PHP_EOL;
+    
 
 
     # make config and language
@@ -168,6 +168,13 @@ if ($ts->connect()) {
         }
     }
 
+    
+
+    if(!isset($functions)){
+      exit(ERR.$lang['core']['noFunction'][$config['lang']].PHP_EOL);
+    }
+
+    echo $lang['core']['preview'][$config['lang']].PHP_EOL;
 
     # get socket
     $socket = $ts->runtime['socket'];
@@ -178,7 +185,7 @@ if ($ts->connect()) {
 
         while(1){
 
-          $client = qBot::getData($socket);
+          $client = bot::getData($socket);
 
           if (array_key_exists('notifycliententerview', $client) && array_key_exists('joinServer', $functions))
                     {

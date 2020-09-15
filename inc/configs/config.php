@@ -31,7 +31,7 @@ $config['conn'] = [
 
   'login' => 'serveradmin',   # Login query
 
-  'passwd' => 'xXx',   # Hasło query
+  'passwd' => 'lQBCt2hH',   # Hasło query
 
   'channelId' => 1,   # Id kanału, na którym bot ma siedzieć
 
@@ -51,9 +51,4 @@ $config['conn'] = [
     */
 
 
-];
-
-$config['function'] = [
-
-   
 ];
