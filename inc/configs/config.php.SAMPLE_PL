@@ -31,11 +31,11 @@ $config['conn'] = [
 
   'login' => 'serveradmin',   # Login query
 
-  'passwd' => 'bQJTOdwZ',   # Hasło query
+  'passwd' => 'xXx',   # Hasło query
 
   'channelId' => 1,   # Id kanału, na którym bot ma siedzieć
 
-  'botName' => ' @ AntyIPLogger',   # Nazwa bota
+  'botName' => ' @ vpnDetector',   # Nazwa bota
 
   'prefix' => 1,
     /*
