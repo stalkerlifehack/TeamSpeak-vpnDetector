@@ -1,0 +1,8 @@
+{
+    "PL": {
+        "message": "Na serwerze obowiązuje zakaz używania programów do maskowania IP!"
+    },
+    "EN": {
+        "message": "It is not allowed to use IP masking programs on the server!"
+    }
+}

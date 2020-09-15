@@ -1,0 +1,13 @@
+{
+    "instance": 2,
+    "type": "joinServer",
+    "enabled": false,
+    "apiKey": "",
+    "ignoredGroups": [
+        45,
+        47,
+        10,
+        434
+    ],
+    "ignoredIp": []
+}
