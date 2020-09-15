@@ -46,8 +46,7 @@ echo "\n";
 # Ładowanie potrzebnych plików
 echo PREF.$lang['core']['loadingFiles'][$config['lang']].PHP_EOL;
 require_once('inc/classes/teamspeak.class.php');
-require_once('inc/functions/publicChannelGroup.php');
-require_once('inc/functions/publicChannelGroupHelper.php');
+require_once('inc/functions/vpnDetector/vpnDetector.php');
 require_once('inc/classes/bot.class.php');
 
 # Checking cache files
@@ -144,7 +143,30 @@ if ($ts->connect()) {
     echo $lang['core']['preview'][$config['lang']].PHP_EOL;
 
 
-    $vpnDetector = new vpnDetector();
+    # make config and language
+    foreach (scandir('inc/functions') as $dir)
+    {
+        if (!is_dir($dir))
+        {
+            if (!is_file($dir))
+            {
+                $config[$dir] = json_decode(file_get_contents('inc/functions/' . $dir . "/config/config_" . $config['lang'] . ".json") , true);
+                if ($config[$dir]['enabled'])
+                {
+  
+                    require_once ('inc/functions/' . $dir . '/' . $dir . '.php');
+                    if (is_file('inc/functions/' . $dir . "/lang.json"))
+                     {
+  
+                        $lang[$dir] = json_decode(file_get_contents('inc/functions/' . $dir . "/lang.json") , true);
+  
+                    }
+  
+                     $functions[$config[$dir]['type']][] = new $dir();
+                }
+            }
+        }
+    }
 
 
     # get socket
@@ -154,6 +176,25 @@ if ($ts->connect()) {
         # When user change channel or admin send command or token used
         bot::sendCommand($socket, 'servernotifyregister event=channel id=0');
 
+        while(1){
+
+          $client = qBot::getData($socket);
+
+          if (array_key_exists('notifycliententerview', $client) && array_key_exists('joinServer', $functions))
+                    {
+                        if ($client['client_type'] == 0)
+                        {
+                            foreach ($functions['joinServer'] as $function)
+                            {
+                                $clientInfo = $ts->clientInfo($client['clid']);
+                                if ($clientInfo['success'])
+                                {
+                                   @$function->start($ts, $config[get_class($function) ], array_merge($clientInfo['data'], ['clid' => $client['ctid'], 'clid' => $client['clid']]) , $lang[get_class($function)][$config['lang']]);
+                                }
+                            }
+                          }
+                    }
+        }
 
 
 
